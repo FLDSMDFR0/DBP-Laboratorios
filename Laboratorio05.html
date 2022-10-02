@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>DBP</title>    
+	<script>
+		document.addEventListener('DOMContentLoaded', () => 
+	{  
+		var counter = 0;
+	   document.querySelector('#new-task').onsubmit = () => 
+	   {	//////////////creando objetos//////////////////
+			const cb = document.createElement("INPUT");
+      		const db = document.createElement("INPUT");
+            const xb = document.createElement("BUTTON");
+			cb.setAttribute("type", "checkbox");
+    	    cb.setAttribute("id", "checkbox1");
+       		db.setAttribute("type", "checkbox");
+       		db.setAttribute("id", "checkbox2");
+            //xb.setAttribute("id", "button");
+            //xb.setAttribute("onclick", "remove()");
+            db.style.color="blue";
+			const li = document.createElement('li');
+			li.appendChild(cb);
+			li.innerHTML += document.querySelector('#task').value;
+        	li.appendChild(db);
+            //li.appendChild(xb);
+			document.querySelector('#tasks').append(li);
+			document.querySelector('#task').value = '';
+            counter=counter+1;
+            ////////creando lista de elementos///////////////
+			var lista = document.querySelectorAll("li");
+			document.querySelector('#todito').onclick = () => 
+	  		{	
+	  			for (var i = 0; i < counter; i++){
+	        		var box = lista[i].querySelector('#checkbox1');
+	   		 		box.checked = true;}
+			}
+        	document.addEventListener('click', function() 
+	        {
+	        	for (var i = 0; i < counter; i++) {
+                	var box = lista[i].querySelector('#checkbox1');
+	   		 		var box2 = lista[i].querySelector('#checkbox2');
+	   		 		if (box.checked === true && box2.checked === true){lista[i].remove();}
+		  			else if (box.checked === true){lista[i].style.textDecoration = "line-through";}
+		   		 	else if (box2.checked === true){lista[i].remove();}
+		   		 	else {lista[i].style.textDecoration = "";}
+	        	}
+			},false);
+		return false;};    	
+	});
+	</script>
+  </head>
+<body>
+    <p>Computer Science</p>
+	<h1>Tasks</h1>
+	<form id="new-task">
+		<input id="task" autocomplete="off" autofocus placeholder="Make a wish" type="text">
+		<input type="submit"><br>
+	</form><br>
+    <button  id="todito">TomaTodo</button>
+	<ol id="tasks">
+	</ol><br>
+</body>
+</html>
